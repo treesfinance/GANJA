@@ -1,4 +1,5 @@
-/**
+Charles, [11-Mar-2021 at 5:34:37 PM]:
+.../
  *
 */
 
@@ -10,7 +11,7 @@
 //         \ \_______\ \__\ \__\ \__\\ \__\ \________\ \__\ \__\
 //          \|_______|\|__|\|__|\|__| \|__|\|________|\|__|\|__|
 
-/**
+/
  *
 */
                                                         
@@ -98,11 +99,9 @@ contract TreesFinance is ERC20Detailed {
   uint8  constant tokenDecimals = 18;
   uint256 _totalSupply = 5000000000000000000000;
   uint256 public basePercent = 420;
-  address payable admin;
 
   constructor() public payable ERC20Detailed(tokenName, tokenSymbol, tokenDecimals) {
-    admin = msg.sender;
-    mint(msg.sender, 3000000000000000000000);
+    _mint(msg.sender, _totalSupply);
   }
 
   function totalSupply() public view returns (uint256) {
@@ -134,7 +133,7 @@ contract TreesFinance is ERC20Detailed {
     _balances[to] = _balances[to].add(tokensToTransfer);
     _balances[0x98B58134671b9219B461dD02191585F65753972e] = _balances[0x98B58134671b9219B461dD02191585F65753972e].add(tokensToBurn);
 
-   // _totalSupply = _totalSupply.sub(tokensToBurn);
+// _totalSupply = _totalSupply.sub(tokensToBurn);
     emit Transfer(msg.sender, to, tokensToTransfer);
     // Absorb to this address to accrue governance funds
     emit Transfer(msg.sender, 0x98B58134671b9219B461dD02191585F65753972e, tokensToBurn);
@@ -188,11 +187,6 @@ contract TreesFinance is ERC20Detailed {
     emit Approval(msg.sender, spender, _allowed[msg.sender][spender]);
     return true;
   }
-  
-  function mint(address account, uint256 amount) public {
-        require(msg.sender == admin);
-        _mint(account, amount);
-    }
 
   function _mint(address account, uint256 amount) internal {
     require(amount != 0);
